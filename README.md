@@ -1,6 +1,6 @@
 # backend-blog-application
 
-[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com) [![Greenkeeper badge](https://badges.greenkeeper.io/andela/king-kong-ah-backend.svg)](https://greenkeeper.io/) ![Build Status](https://travis-ci.com/andela/king-kong-ah-backend.svg?branch=develop) ![Coverage Status](https://coveralls.io/repos/github/andela/king-kong-ah-backend/badge.svg?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/maintainability)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/test_coverage)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/test_coverage)
 
 A Social platform for the creative at heart.
 =======
