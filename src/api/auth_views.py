@@ -1,24 +1,23 @@
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
-from app import bcrypt, db
-from models import User, BlacklistToken
-
-auth_blueprint = Blueprint('auth', __name__)
+from src.api.endpoints.auth.models import User
+from src.api.app import db
 
 class RegisterAPI(MethodView):
     """
     User registration resource
     """
+
     def post(self):
         post_data = request.get_json()
         user = User.query.filter_by(email=post_data.get('email')).first()
-        if no user:
+        if not user:
             try:
                 user = User(
-                    name = post_data.get('name'),
-                    photo = post_data.get('photo'),
-                    email = post_data.get('email'),
-                    password = post_data.get('password')
+                    name=post_data.get('name'),
+                    photo=post_data.get('photo'),
+                    email=post_data.get('email'),
+                    password=post_data.get('password')
                 )
                 db.session.add(user)
                 db.session.commit()
@@ -28,7 +27,7 @@ class RegisterAPI(MethodView):
                     "message": "Successfully registered",
                     "auth_token": auth_token.decode()
                 }
-                return make_response(jsonify(response)) 201
+                return make_response(jsonify(response)), 201
             except Exception as e:
                 response = {
                     "status": "fail",
@@ -42,7 +41,6 @@ class RegisterAPI(MethodView):
             }
             return make_response(jsonify(response)), 202
 
+
 registration_view = RegisterAPI.as_view('register_api')
-auth_blueprint.add_url_rule("auth/register",
-                            view_func=registration_view,
-                            methods=['POST'])
+

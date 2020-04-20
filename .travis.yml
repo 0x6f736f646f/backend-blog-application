@@ -21,8 +21,6 @@ script:
         - python manage.py db init
         - python manage.py migrate
         - python3 manage.py db upgrade
-        - coverage run --source='.' manage.py test
-        - coverage report
+        - python3 manage.py test
+        - flake8 api
 
-after_success:
-          - coveralls

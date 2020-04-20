@@ -1,6 +1,7 @@
 import datetime
 import jwt
-from app import app, db, bcrypt
+from src.api.app import app, db, bcrypt
+
 
 class User(db.Model):
     """
@@ -26,14 +27,15 @@ class User(db.Model):
         self.registered_on = datetime.datetime.now()
         self.role = role
 
-    def encode_auth_token(self, user_id):
+    @staticmethod
+    def encode_auth_token(user_id):
         """
         Generates the auth token
         :return string
         """
         try:
             payload = {
-                'expiry': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=60)
+                'expiry': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=60),
                 'time_now': datetime.datetime.utcnow(),
                 'user': user_id
             }
@@ -87,7 +89,3 @@ class BlackListToken(db.Model):
             return True
         else:
             return False
-
-
-
-
