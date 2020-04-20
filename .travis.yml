@@ -22,9 +22,5 @@ before_script:
         - cd src
 
 script:
-        - python manage.py db init
-        - python manage.py migrate
-        - python3 manage.py db upgrade
-        - python3 manage.py test
         - flake8 api --ignore E402
 
