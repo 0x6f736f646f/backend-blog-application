@@ -29,7 +29,7 @@ def test():
     tests = unittest.TestLoader().discover('tests', pattern="test*.py")
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     if result.wasSuccessful():
-        result 0
+        return 0
     return 1
 
 
