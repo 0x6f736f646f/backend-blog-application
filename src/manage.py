@@ -1,8 +1,8 @@
-import coverage
 import os
+import coverage
 import unittest
 
-from app import app, db
+from api import app, db
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
@@ -22,6 +22,7 @@ manager = Manager(app)
 
 # migrations
 manager.add_command('db', MigrateCommand)
+
 
 @manager.command
 def test():
@@ -48,7 +49,7 @@ def cov():
         print("Coverage summary: ")
         COV.report()
         basedir = os.path.abspath(os.path.dirname(__file__))
-        covdir = os.path.join(basedir, 'coverga')
+        covdir = os.path.join(basedir, 'coverage')
         COV.html_report(directory=covdir)
         COV.erase()
         return 0

@@ -1,6 +1,6 @@
 import datetime
 import jwt
-from src.api.app import app, db, bcrypt
+from api import app, db, bcrypt
 
 
 class User(db.Model):
@@ -14,7 +14,7 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text())
-    registered_on = db.Column(db.Datetime, nullable=False)
+    registered_on = db.Column(db.DateTime, nullable=False)
     role = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name, photo, email, password, bio, role=False):
@@ -35,7 +35,9 @@ class User(db.Model):
         """
         try:
             payload = {
-                'expiry': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=60),
+                'expiry': datetime.datetime.utcnow() + datetime.timedelta(
+                    days=0,
+                    seconds=60),
                 'time_now': datetime.datetime.utcnow(),
                 'user': user_id
             }
@@ -71,9 +73,9 @@ class BlackListToken(db.Model):
     Token model for storing jwt tokens
     """
     __tablename__ = "blacklist_tokens"
-    id = db.Column(db.Integer, primary_key=True, autoincremenr=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token = db.Column(db.String(255), unique=True, nullable=False)
-    blacklisted_on = db.Column(db.Datetime, nullable=False)
+    blacklisted_on = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, token):
         self.token = token

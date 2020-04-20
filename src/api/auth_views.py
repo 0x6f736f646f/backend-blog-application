@@ -1,7 +1,10 @@
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView
-from src.api.endpoints.auth.models import User
-from src.api.app import db
+from api import db
+from api.models import User
+
+auth = Blueprint('auth', __name__)
+
 
 class RegisterAPI(MethodView):
     """
@@ -17,6 +20,7 @@ class RegisterAPI(MethodView):
                     name=post_data.get('name'),
                     photo=post_data.get('photo'),
                     email=post_data.get('email'),
+                    bio=post_data.get('bio'),
                     password=post_data.get('password')
                 )
                 db.session.add(user)
@@ -25,22 +29,25 @@ class RegisterAPI(MethodView):
                 response = {
                     "status": "success",
                     "message": "Successfully registered",
-                    "auth_token": auth_token.decode()
+                    "auth_token": auth_token
                 }
-                return make_response(jsonify(response)), 201
+                return make_response(jsonify(response))
             except Exception as e:
                 response = {
                     "status": "fail",
-                    "message": "Some error occurred. Please try again"
+                    "message": "Some error occurred. Please try again",
+                    "error": e
                 }
-                return make_response(jsonify(response)), 401
+                return make_response(jsonify(response))
         else:
             response = {
                 "status": "fail",
                 "message": "User already exists. Please log in"
             }
-            return make_response(jsonify(response)), 202
+            return make_response(jsonify(response))
 
 
 registration_view = RegisterAPI.as_view('register_api')
-
+auth.add_url_rule("/auth/register",
+                  view_func=registration_view,
+                  methods=['POST'])
