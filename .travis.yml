@@ -22,5 +22,5 @@ script:
         - python manage.py migrate
         - python3 manage.py db upgrade
         - python3 manage.py test
-        - flake8 api
+        - flake8 api --ignore E402
 
