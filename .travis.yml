@@ -6,6 +6,10 @@ python:
 addons:
   postgresql: "11"
 
+services:
+  - postgresql
+
+
 install:
   - pip install -r requirements.txt
   - pip install coveralls
@@ -14,8 +18,9 @@ before_script:
         - psql -c "create database backend_blog;" -U postgres
 
 script:
-        - python manage.py makemigrations
+        - python manage.py db init
         - python manage.py migrate
+        - python3 manage.py db upgrade
         - coverage run --source='.' manage.py test
         - coverage report
 
