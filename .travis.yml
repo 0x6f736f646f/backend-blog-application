@@ -19,6 +19,7 @@ before_script:
         - sudo apt-get install --yes postgresql-server-dev-11
         - sudo /etc/init.d/postgresql restart
         - psql -c "create database backend_blog;" -U postgres
+        - cd src
 
 script:
         - python manage.py db init
