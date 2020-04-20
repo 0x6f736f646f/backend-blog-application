@@ -15,6 +15,9 @@ install:
   - pip install coveralls
 
 before_script:
+        - sudo apt-get update
+        - sudo apt-get install --yes postgresql-server-dev-11
+        - sudo /etc/init.d/postgresql restart
         - psql -c "create database backend_blog;" -U postgres
 
 script:
