@@ -1,7 +1,7 @@
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-database_uri = "postgres://postgres:postgres@127.0.0.1:1001/"
+database_uri = "postgres://postgres:postgres@localhost:5432/"
 database_name = "backend_blog"
 
 
