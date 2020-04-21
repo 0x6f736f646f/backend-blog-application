@@ -1,4 +1,5 @@
 import datetime
+
 import jwt
 from api import app, db, bcrypt
 
@@ -24,21 +25,19 @@ class User(db.Model):
         self.password = bcrypt.generate_password_hash(
             password, app.config.get("BCRYPT_LOG_ROUNDS")
         )
+        self.bio = bio
         self.registered_on = datetime.datetime.now()
         self.role = role
 
-    @staticmethod
-    def encode_auth_token(user_id):
+    def encode_auth_token(self, user_id):
         """
         Generates the auth token
         :return string
         """
         try:
             payload = {
-                'expiry': datetime.datetime.utcnow() + datetime.timedelta(
-                    days=0,
-                    seconds=60),
-                'time_now': datetime.datetime.utcnow(),
+                'expiry': datetime.datetime.utcnow().__str__() + datetime.timedelta(days=0, seconds=60).__str__(),
+                'time_now': datetime.datetime.utcnow().__str__(),
                 'user': user_id
             }
             return jwt.encode(payload,
