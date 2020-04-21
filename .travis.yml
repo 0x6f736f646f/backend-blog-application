@@ -24,3 +24,5 @@ before_script:
 script:
         - flake8 api --ignore E402
 
+after_success:
+  - coveralls
