@@ -132,7 +132,7 @@ dmypy.json
 .vscode/
 
 # Database migrations
-migrations/*
+migrations/
 
 # Pychram
 .idea/
