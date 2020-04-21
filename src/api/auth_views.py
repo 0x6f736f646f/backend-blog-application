@@ -1,7 +1,8 @@
-from flask import Blueprint, request, make_response, jsonify
-from flask.views import MethodView
 from api import db
+from api.helpers import response_builder
 from api.models import User
+from flask import Blueprint, request
+from flask.views import MethodView
 
 auth = Blueprint('auth', __name__)
 
@@ -25,26 +26,26 @@ class RegisterAPI(MethodView):
                 )
                 db.session.add(user)
                 db.session.commit()
-                auth_token = user.encode_auth_token(user_id=user.id)
+                auth_token = user.encode_auth_token(user.id)
                 response = {
                     "status": "success",
                     "message": "Successfully registered",
-                    "auth_token": auth_token
+                    "auth_token": auth_token.decode()
                 }
-                return make_response(jsonify(response))
+                return response_builder(response, 201)
             except Exception as e:
                 response = {
                     "status": "fail",
                     "message": "Some error occurred. Please try again",
                     "error": e
                 }
-                return make_response(jsonify(response))
+                return response_builder(response, 401)
         else:
             response = {
                 "status": "fail",
                 "message": "User already exists. Please log in"
             }
-            return make_response(jsonify(response))
+            return response_builder(response, status_code=202)
 
 
 registration_view = RegisterAPI.as_view('register_api')
