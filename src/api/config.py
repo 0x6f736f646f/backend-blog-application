@@ -24,5 +24,15 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = database_uri + database_name
 
 
+class TestingConfig(BaseConfig):
+    """
+    Test configuration
+    """
+    DEBUG = True
+    TESTING = True
+    BCRYPT_LOG_ROUNDS = 7
+    SQLALCHEMY_DATABASE_URI = database_uri + database_name + "_test"
+
+
 class Development(DevelopmentConfig):
     pass
