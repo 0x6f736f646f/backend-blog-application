@@ -35,8 +35,10 @@ class User(db.Model):
         :return string
         """
         try:
+            time_to_leave = datetime.datetime.utcnow() + datetime.timedelta(
+                days=0, seconds=60)
             payload = {
-                'expiry': datetime.datetime.utcnow().__str__() + datetime.timedelta(days=0, seconds=60).__str__(),
+                'expiry': time_to_leave.__str__(),
                 'time_now': datetime.datetime.utcnow().__str__(),
                 'user': user_id
             }
