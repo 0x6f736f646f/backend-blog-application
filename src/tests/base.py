@@ -8,7 +8,7 @@ class BaseTestCase(TestCase):
     """
 
     def create_app(self):
-        app.config.from_object("src.api.config.TestingConfig")
+        app.config.from_object("api.config.TestingConfig")
         return app
 
     def setUp(self):
