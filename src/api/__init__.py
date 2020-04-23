@@ -17,5 +17,5 @@ app.config.from_object(app_settings)
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 
-from api.auth_views import auth
-app.register_blueprint(auth)
+from api.views.userView import user
+app.register_blueprint(user)
