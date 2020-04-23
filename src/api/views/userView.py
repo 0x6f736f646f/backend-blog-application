@@ -1,6 +1,6 @@
 from api import db
 from api.helpers import response_builder
-from api.models import User
+from api.models.userModel import User
 from flask import Blueprint, request
 from flask.views import MethodView
 

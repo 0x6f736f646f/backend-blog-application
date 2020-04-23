@@ -4,7 +4,7 @@ import jwt
 from api import app, db, bcrypt
 
 
-class User(db.Model):
+class UserModel(db.Model):
     """
     User model for storing user related details
     """
@@ -24,12 +24,13 @@ class User(db.Model):
         self.email = email
         self.password = bcrypt.generate_password_hash(
             password, app.config.get("BCRYPT_LOG_ROUNDS")
-        )
+        ).decode('utf-8')
         self.bio = bio
         self.registered_on = datetime.datetime.now()
         self.role = role
 
-    def encode_auth_token(self, user_id):
+    @staticmethod
+    def encode_auth_token(user_id):
         """
         Generates the auth token
         :return string
@@ -67,6 +68,35 @@ class User(db.Model):
             return "Signature expired. Please log in again"
         except jwt.InvalidTokenError:
             return "Invalid token. Please log in again"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self, name, photo, password, email, bio, role=False):
+        self.name = name
+        self.photo = photo
+        self.email = email
+        self.password = bcrypt.generate_password_hash(
+            password, app.config.get("BCRYPT_LOG_ROUNDS")
+        )
+        self.bio = bio
+        self.role = role
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @staticmethod
+    def get_all_blogpost(self):
+        return UserModel.query.all()
+
+    @staticmethod
+    def get_one_blogpost(self, id):
+        return UserModel.query.get(id)
+
+    def __repr__(self):
+        return "<id: {}>".format(self.id)
 
 
 class BlackListToken(db.Model):
