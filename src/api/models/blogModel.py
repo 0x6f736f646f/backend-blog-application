@@ -1,4 +1,4 @@
-from api import app, db, bcrypt
+from api import db
 import datetime
 
 
