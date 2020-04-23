@@ -1,15 +1,19 @@
 import os
+from dotenv import load_dotenv
+
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(dotenv_path=dotenv_path)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-database_uri = "postgres://postgres:postgres@localhost:5432/"
-database_name = "backend_blog"
+database_uri = os.getenv("DATABASE_URI")
+database_name = os.getenv("DATABASE_NAME")
 
 
 class BaseConfig:
     """
     Base configurations
     """
-    SECRET_KEY = os.getenv("SECRET_KEY", "backend_blog")
+    SECRET_KEY = os.getenv("SECRET_KEY")
     DEBUG = False
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
