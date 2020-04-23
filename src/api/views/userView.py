@@ -57,8 +57,10 @@ class LoginApi(MethodView):
         post_data = request.get_json()
         print(post_data)
         try:
-            user = UserModel.query.filter_by(email=post_data.get('email')).first()
-            if user and bcrypt.check_password_hash(user.password, post_data.get("password")):
+            user = UserModel.query.filter_by(
+                email=post_data.get('email')).first()
+            if user and bcrypt.check_password_hash(
+                    user.password, post_data.get("password")):
                 print(user.id)
                 auth_token = user.encode_auth_token(user.id)
                 if auth_token:
