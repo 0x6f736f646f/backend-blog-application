@@ -35,7 +35,7 @@ class TestingConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     BCRYPT_LOG_ROUNDS = 7
-    SQLALCHEMY_DATABASE_URI = "postgres://psotgres:postgres@127.0.0.1:5432/backend_blog_test"
+    SQLALCHEMY_DATABASE_URI = "postgres://postgres:postgres@localhost:5432/backend_blog_test"
 
 
 class Development(DevelopmentConfig):
