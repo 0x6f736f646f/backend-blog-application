@@ -1,7 +1,7 @@
 import unittest
 from base import BaseTestCase
 from api import db
-from api.models import User
+from api.models.userModel import UserModel as User
 
 
 class TestUserModel(BaseTestCase):
