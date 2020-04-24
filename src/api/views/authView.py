@@ -170,10 +170,11 @@ class ConfirmEmail(MethodView):
     def get(self, token):
         try:
             email = confirm_token(token)
-        except:
+        except Exception as e:
             response = {
                 "status": "fail",
-                "message": "The confirmation link is invalid or has expired"
+                "message": "The confirmation link is invalid or has expired",
+                "error": e
             }
             return response_builder(response, status_code=202)
         user = UserModel.query.filter_by(email=email).first()
