@@ -1,5 +1,5 @@
 from api.helpers import response_builder
-from api.models.userModel import UserModel, BlackListToken
+from api.models.userModel import UserModel
 from flask import Blueprint, request
 from flask.views import MethodView
 
