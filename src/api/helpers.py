@@ -12,8 +12,10 @@ def response_builder(data, status_code=200):
 
 
 def generate_confirmation_token(email):
-    """We use the URLSafeTimedSerializer to generate a token using the email address
-    Actual email address is encoded in the token
+    """
+    We use the URLSafeTimedSerializer to generate a token
+    using the email address Actual email address is encoded
+    in the token
     :param email:
     :return token:
     """
@@ -28,14 +30,11 @@ def confirm_token(token, expiration=3600):
     :return email:
     """
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    try:
-        email = serializer.loads(
-            token,
-            max_age=expiration,
-            salt=app.config['SECURITY_PASSWORD_KEY']
-        )
-    except:
-        return False
+    email = serializer.loads(
+        token,
+        max_age=expiration,
+        salt=app.config['SECURITY_PASSWORD_KEY']
+    )
     return email
 
 

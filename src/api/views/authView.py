@@ -1,5 +1,8 @@
 from api import db, bcrypt
-from api.helpers import response_builder, generate_confirmation_token, confirm_token, send_mail
+from api.helpers import (response_builder,
+                         generate_confirmation_token,
+                         confirm_token,
+                         send_mail)
 from api.models.userModel import UserModel, BlackListToken
 from flask import Blueprint, request, url_for
 from flask.views import MethodView
@@ -30,11 +33,15 @@ class RegisterAPI(MethodView):
                 auth_token = UserModel.encode_auth_token(user_id=user.id)
                 validated_user = UserModel.query.filter_by(id=user.id).first()
                 token = generate_confirmation_token(validated_user.email)
-                confirm_url = url_for("auth.confirm_email_api", token=token, _external=True)
+                confirm_url = url_for("auth.confirm_email_api",
+                                      token=token,
+                                      _external=True)
                 send_mail(user.email, "Please confirm email", confirm_url)
                 response = {
                     "status": "success",
-                    "message": "Successfully registered and a confirmation email has been sent",
+                    "message":
+                        "Successfully registered. "
+                        "Confirmation email has been sent to your email",
                     "auth_token": auth_token.decode(),
                     "user_data": {
                         "name": validated_user.id,
@@ -163,10 +170,11 @@ class ConfirmEmail(MethodView):
     def get(self, token):
         try:
             email = confirm_token(token)
-        except:
+        except Exception as e:
             response = {
                 "status": "fail",
-                "message": "The confirmation link is invalid or has expired"
+                "message": "The confirmation link is invalid or has expired",
+                "error": e
             }
             return response_builder(response, status_code=202)
         user = UserModel.query.filter_by(email=email).first()
