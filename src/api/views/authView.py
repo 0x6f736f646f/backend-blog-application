@@ -1,5 +1,8 @@
 from api import db, bcrypt
-from api.helpers import response_builder, generate_confirmation_token, confirm_token, send_mail
+from api.helpers import (response_builder,
+                         generate_confirmation_token,
+                         confirm_token,
+                         send_mail)
 from api.models.userModel import UserModel, BlackListToken
 from flask import Blueprint, request, url_for
 from flask.views import MethodView
