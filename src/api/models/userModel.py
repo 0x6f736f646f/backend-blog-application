@@ -16,22 +16,21 @@ class UserModel(db.Model):
     password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text())
     registered_on = db.Column(db.DateTime, nullable=False)
-    role = db.Column(db.Boolean, nullable=False)
+    role = db.Column(db.Boolean, nullable=True)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, name, photo, email,
-                 password, confirmed, bio, role=False):
-        self.name = name
-        self.photo = photo
-        self.email = email
+    def __init__(self, post_data):
+        self.name = post_data.get('name')
+        self.photo = post_data.get('photo')
+        self.email = post_data.get('email')
         self.password = bcrypt.generate_password_hash(
-            password, app.config.get("BCRYPT_LOG_ROUNDS")
+            post_data.get('password'), app.config.get("BCRYPT_LOG_ROUNDS")
         ).decode('utf-8')
-        self.bio = bio
+        self.bio = post_data.get('bio')
         self.registered_on = datetime.datetime.now()
-        self.role = role
-        self.confirmed = confirmed
+        self.role = post_data.get('role')
+        self.confirmed = False
 
     @staticmethod
     def encode_auth_token(user_id):
@@ -77,15 +76,6 @@ class UserModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def update(self, name, photo, password, email, bio, role=False):
-        self.name = name
-        self.photo = photo
-        self.email = email
-        self.password = bcrypt.generate_password_hash(
-            password, app.config.get("BCRYPT_LOG_ROUNDS")
-        )
-        self.bio = bio
-        self.role = role
 
     def delete(self):
         db.session.delete(self)
