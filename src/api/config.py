@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 
 dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
@@ -17,7 +18,14 @@ class BaseConfig:
     DEBUG = False
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+    SECURITY_PASSWORD_KEY = os.getenv("SECURITY_PASSWORD_KEY")
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 465
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+    MAIL_DEFAULT_SENDER = os.getenv("MAIL_SENDER")
 
 class DevelopmentConfig(BaseConfig):
     """
@@ -26,6 +34,14 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 7
     SQLALCHEMY_DATABASE_URI = database_uri + database_name
+    SECURITY_PASSWORD_KEY = os.getenv("SECURITY_PASSWORD_KEY")
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+    MAIL_DEFAULT_SENDER = os.getenv("MAIL_SENDER")
 
 
 class TestingConfig(BaseConfig):
@@ -35,7 +51,7 @@ class TestingConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     BCRYPT_LOG_ROUNDS = 7
-    SQLALCHEMY_DATABASE_URI = "postgres://postgres:postgres@localhost:5432/backend_blog_test"
+    SQLALCHEMY_DATABASE_URI = database_uri + database_name + "_test"
 
 
 class Development(DevelopmentConfig):
