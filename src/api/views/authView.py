@@ -39,7 +39,9 @@ class RegisterAPI(MethodView):
                 send_mail(user.email, "Please confirm email", confirm_url)
                 response = {
                     "status": "success",
-                    "message": "Successfully registered and a confirmation email has been sent",
+                    "message":
+                        "Successfully registered. "
+                        "Confirmation email has been sent to your email",
                     "auth_token": auth_token.decode(),
                     "user_data": {
                         "name": validated_user.id,
