@@ -20,7 +20,8 @@ class UserModel(db.Model):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, name, photo, email, password, confirmed, bio, role=False):
+    def __init__(self, name, photo, email,
+                 password, confirmed, bio, role=False):
         self.name = name
         self.photo = photo
         self.email = email
