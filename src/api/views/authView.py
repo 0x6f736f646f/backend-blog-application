@@ -17,14 +17,7 @@ class RegisterAPI(MethodView):
         user = UserModel.query.filter_by(email=post_data.get('email')).first()
         if not user:
             try:
-                user = UserModel(
-                    name=post_data.get('name'),
-                    photo=post_data.get('photo'),
-                    email=post_data.get('email'),
-                    bio=post_data.get('bio'),
-                    password=post_data.get('password'),
-                    confirmed=False
-                )
+                user = UserModel(post_data)
                 db.session.add(user)
                 db.session.commit()
                 auth_token = UserModel.encode_auth_token(user_id=user.id)

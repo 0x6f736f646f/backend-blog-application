@@ -16,14 +16,14 @@ class BlogpostModel(db.Model):
     tags = db.Column(db.String(255))
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    def __init__(self, title, description, content, photo, tags, owner_id):
-        self.title = title
-        self.description = description
-        self.content = content
-        self.photo = photo
-        self.tags = tags
+    def __init__(self, post_data):
+        self.title = post_data.get('title')
+        self.description = post_data.get('description')
+        self.content = post_data.get('content')
+        self.photo = post_data.get('photo')
+        self.tags = post_data.get('tags')
         self.created_at = datetime.datetime.now()
-        self.owner_id = owner_id
+        self.owner_id = post_data.get('owner_id')
 
     def save(self):
         db.session.add(self)
