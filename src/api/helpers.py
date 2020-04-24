@@ -12,8 +12,10 @@ def response_builder(data, status_code=200):
 
 
 def generate_confirmation_token(email):
-    """We use the URLSafeTimedSerializer to generate a token using the email address
-    Actual email address is encoded in the token
+    """
+    We use the URLSafeTimedSerializer to generate a token
+    using the email address Actual email address is encoded
+    in the token
     :param email:
     :return token:
     """
