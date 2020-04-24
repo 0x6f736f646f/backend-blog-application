@@ -11,14 +11,16 @@ class UserModel(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
-    photo = db.Column(db.String(255), nullable=False)
+    photo = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text())
     registered_on = db.Column(db.DateTime, nullable=False)
     role = db.Column(db.Boolean, nullable=False)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, name, photo, email, password, bio, role=False):
+    def __init__(self, name, photo, email, password, confirmed, bio, role=False):
         self.name = name
         self.photo = photo
         self.email = email
@@ -28,6 +30,7 @@ class UserModel(db.Model):
         self.bio = bio
         self.registered_on = datetime.datetime.now()
         self.role = role
+        self.confirmed = confirmed
 
     @staticmethod
     def encode_auth_token(user_id):
@@ -69,7 +72,7 @@ class UserModel(db.Model):
         except jwt.InvalidTokenError:
             return "Invalid token. Please log in again"
 
-    def save(self):
+    def save_user(self):
         db.session.add(self)
         db.session.commit()
 
@@ -85,6 +88,12 @@ class UserModel(db.Model):
 
     def delete(self):
         db.session.delete(self)
+        db.session.commit()
+
+    def update_confirmation(self):
+        self.confirmed = True
+        self.confirmed_on = datetime.datetime.now()
+        db.session.add(self)
         db.session.commit()
 
     @staticmethod
