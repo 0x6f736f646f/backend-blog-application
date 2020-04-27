@@ -20,7 +20,7 @@ before_script:
   - sudo /etc/init.d/postgresql restart
   - psql -c "create database backend_blog_test;" -U postgres
   - cd src
-  - echo "TEST_DATABASE_NAME=postgres://postgres@localhost/backend_blog_test" > api/.env
+  - echo "TEST_DATABASE_NAME=postgres://postgres:postgres@localhost:5432/backend_blog_test" > api/.env
   - python3 manage.py db init
   - python3 manage.py db migrate
   - python3 manage.py db upgrade
