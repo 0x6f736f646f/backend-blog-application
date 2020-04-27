@@ -11,8 +11,8 @@ COV = coverage.coverage(
     include="api/*",
     omit=[
         'tests/*',
-        'config.py'
-        'app.py'
+        'config.py',
+        '*/__init__.py'
     ]
 )
 
