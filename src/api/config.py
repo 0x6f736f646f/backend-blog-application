@@ -34,7 +34,7 @@ class DevelopmentConfig(BaseConfig):
     """
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 7
-    SQLALCHEMY_DATABASE_URI = database_uri + database_name
+    SQLALCHEMY_DATABASE_URI = os.getenv("TEST_DATABASE_NAME")
 
 
 class TestingConfig(BaseConfig):
