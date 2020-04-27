@@ -15,16 +15,14 @@ install:
   - pip install coveralls
 
 before_script:
-        - sudo apt-get update
-        - sudo apt-get install --yes postgresql-server-dev-11
-        - sudo /etc/init.d/postgresql restart
         - psql -c "create database backend_blog_test;" -U postgres
         - cd src
-        - python3 manage.py test
-        - python3 manage.py cov
+        - echo "TEST_DATABASE_NAME=postgres://postgres@localhost/backend_blog_test" > api/.env
 
 script:
-        - flake8 api --ignore E402
+  - python3 manage.py test
+  - python3 manage.py cov
+  - flake8 api --ignore E402
 
 after_success:
   - coveralls
