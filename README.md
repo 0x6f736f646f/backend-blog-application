@@ -1,6 +1,6 @@
 # backend-blog-application
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/maintainability)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/test_coverage)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/test_coverage)[![Build Status](https://travis-ci.com/0x6f736f646f/backend-blog-application.svg?branch=master)](https://travis-ci.com/0x6f736f646f/backend-blog-application)[![Coverage Status](https://coveralls.io/repos/github/0x6f736f646f/backend-blog-application/badge.svg?branch=master)](https://coveralls.io/github/0x6f736f646f/backend-blog-application?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/maintainability)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/354b85bbab1b5c60ee52/test_coverage)](https://codeclimate.com/github/0x6f736f646f/backend-blog-application/test_coverage)[![Build Status](https://travis-ci.com/0x6f736f646f/backend-blog-application.svg?branch=master)](https://travis-ci.com/0x6f736f646f/backend-blog-application)[![Coverage Status](https://coveralls.io/repos/github/0x6f736f646f/backend-blog-application/badge.svg)](https://coveralls.io/github/0x6f736f646f/backend-blog-application)
 
 A Social platform for the creative at heart.
 =======
