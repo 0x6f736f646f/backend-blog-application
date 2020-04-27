@@ -35,14 +35,6 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 7
     SQLALCHEMY_DATABASE_URI = database_uri + database_name
-    SECURITY_PASSWORD_KEY = os.getenv("SECURITY_PASSWORD_KEY")
-    MAIL_SERVER = "smtp.gmail.com"
-    MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-    MAIL_DEFAULT_SENDER = os.getenv("MAIL_SENDER")
 
 
 class TestingConfig(BaseConfig):
@@ -55,5 +47,3 @@ class TestingConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.getenv("TEST_DATABASE_NAME")
 
 
-class Development(DevelopmentConfig):
-    pass
