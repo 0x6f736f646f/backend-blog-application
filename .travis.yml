@@ -15,9 +15,12 @@ install:
   - pip install coveralls
 
 before_script:
-        - psql -c "create database backend_blog_test;" -U postgres
-        - cd src
-        - echo "TEST_DATABASE_NAME=postgres://postgres@localhost/backend_blog_test" > api/.env
+  - sudo apt-get update
+  - sudo apt-get install --yes postgresql-server-dev-11
+  - sudo /etc/init.d/postgresql restart
+  - psql -c "create database backend_blog_test;" -U postgres
+  - cd src
+  - echo "TEST_DATABASE_NAME=postgres://postgres@localhost/backend_blog_test" > api/.env
 
 script:
   - python3 manage.py test
