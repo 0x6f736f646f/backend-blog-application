@@ -21,8 +21,12 @@ before_script:
   - psql -c "create database backend_blog_test;" -U postgres
   - cd src
   - echo "TEST_DATABASE_NAME=postgres://postgres@localhost/backend_blog_test" > api/.env
+  - python3 manage.py db init
+  - python3 manage.py db migrate
+  - python3 manage.py db upgrade
 
 script:
+  -
   - python3 manage.py test
   - python3 manage.py cov
   - flake8 api --ignore E402
