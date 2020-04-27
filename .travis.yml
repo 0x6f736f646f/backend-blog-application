@@ -26,8 +26,8 @@ before_script:
   - python3 manage.py db upgrade
 
 script:
-  - nosetests --with-coverage --cover-erase --cover-package=api
   - flake8 api --ignore E402
+  - nosetests --with-coverage --cover-erase --cover-package=api
 
 after_success:
   - coveralls
