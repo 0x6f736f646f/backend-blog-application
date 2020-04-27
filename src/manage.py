@@ -57,6 +57,19 @@ def cov():
 
 
 @manager.command
+def coveralls():
+    """Runs the unit tests with coverage."""
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
+    COV.stop()
+    COV.save()
+    COV.report()
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    covdir = os.path.join(basedir, 'tmp/coverage')
+    COV.html_report(directory=covdir)
+    COV.erase()
+
+@manager.command
 def create_database():
     """
     Creates the database tables
